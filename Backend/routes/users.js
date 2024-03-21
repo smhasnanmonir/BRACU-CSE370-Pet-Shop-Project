@@ -29,4 +29,14 @@ userRouter.post("/allUser", (req, res) => {
   });
 });
 
+userRouter.put("/updateUser/:id", (req, res) => {
+  const id = req.params.id;
+  const q = "update user_table set email = ?, password = ? where user_id = ?";
+  const values = [req.body.email, req.body.password, id];
+  db.query(q, values, (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
 export default userRouter;
