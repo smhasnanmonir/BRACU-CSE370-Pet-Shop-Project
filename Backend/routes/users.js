@@ -1,9 +1,9 @@
 import express from "express";
 import db from "../connect.js";
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.get("/all", (req, res) => {
+userRouter.get("/allUser", (req, res) => {
   let q = "SELECT * FROM user_table";
   db.query(q, (err, data) => {
     if (err) res.send(err);
@@ -11,4 +11,22 @@ router.get("/all", (req, res) => {
   });
 });
 
-export default router;
+userRouter.get("/singleUser/:id", (req, res) => {
+  let id = req.params.id;
+  let q = "SELECT * FROM user_table WHERE user_id = ?";
+  db.query(q, id, (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
+userRouter.post("/allUser", (req, res) => {
+  let q = "insert into user_table (`username`, `email`, `password`) values (?)";
+  const values = [req.body.username, req.body.email, req.body.password];
+  db.query(q, [values], (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
+export default userRouter;
