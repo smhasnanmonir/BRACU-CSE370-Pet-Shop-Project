@@ -1,0 +1,53 @@
+.logo {
+  width: 40%;
+}
+
+.mostOuterDiv {
+  background-color: #ffa94d;
+  padding: 0px 50px;
+}
+
+.navLink {
+  display: block;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  background-color: #ffa94d;
+  color: white;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.navigationDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  padding: 25px 0px;
+  width: 60%;
+  font-weight: 600;
+}
+
+.outerNavDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
+
+.searchBox {
+  display: flex;
+  gap: 12px;
+}
+
+.searchButton {
+  text-decoration: none;
+  background-color: #ffd43b;
+  border: none;
+  padding: 5px 13px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
