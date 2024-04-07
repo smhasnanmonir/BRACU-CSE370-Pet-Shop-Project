@@ -4,7 +4,7 @@ import db from "../connect.js";
 const userRouter = express.Router();
 
 // Get all users data from database
-userRouter.get("/allUser", (req, res) => {
+userRouter.get("/users", (req, res) => {
   let q = "SELECT * FROM user_table";
   db.query(q, (err, data) => {
     if (err) res.send(err);
