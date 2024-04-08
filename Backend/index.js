@@ -4,6 +4,7 @@ import productsRoutes1 from "./routes/products.js";
 import hospitalRoutes1 from "./routes/hospitals.js";
 import postRouter1 from "./routes/userPost.js";
 import productOrder1 from "./routes/productOrder.js";
+import petsRouter1 from "./routes/pets.js";
 
 const app = express();
 const port = 8080;
@@ -14,6 +15,7 @@ app.use("/api", productsRoutes1);
 app.use("/api", hospitalRoutes1);
 app.use("/api", postRouter1);
 app.use("/api", productOrder1);
+app.use("/api", petsRouter1);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

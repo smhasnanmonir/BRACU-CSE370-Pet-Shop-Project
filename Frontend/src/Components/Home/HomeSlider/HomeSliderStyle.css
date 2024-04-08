@@ -1,0 +1,64 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiperImg {
+  display: relative;
+  width: 100% !important;
+  height: 450px;
+  object-fit: cover !important;
+  filter: brightness(80%);
+}
+
+.swiperImgDiv {
+  width: 100% !important;
+  height: 450px;
+  object-fit: cover !important;
+  filter: brightness(80%);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  padding: 0px 70px;
+}
+
+.swiperImgContent {
+  position: absolute;
+  padding: 20px;
+  text-align: center;
+  color: #ffff;
+}
+
+.swiperImgContainer {
+  width: 100% !important;
+  height: 450px;
+  object-fit: cover !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.btn-primary {
+  background-color: #ff922b;
+  padding: 12px 15px;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: #fd7e14;
+}
