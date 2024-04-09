@@ -22,3 +22,23 @@ h6,
 p {
   margin: 0;
 }
+
+.btn1 {
+  background-color: #ffa94d;
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  font-size: 15px;
+}
+
+.btn1:hover {
+  background-color: #fd7e14;
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  font-size: 15px;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+import 'bootstrap/dist/css/bootstrap.min.css';

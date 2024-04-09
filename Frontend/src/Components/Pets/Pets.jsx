@@ -20,8 +20,9 @@ const Pets = () => {
           <div className="petsBox" key={i}>
             <img className="petsImg" src={pet.img} alt={pet.name} />
             <div className="petDetails">
-              <h3>{pet.name}</h3>
+              <h4>{pet.name}</h4>
               <p>{pet.description}</p>
+              <button className="btn1">Adopt</button>
             </div>
           </div>
         ))}

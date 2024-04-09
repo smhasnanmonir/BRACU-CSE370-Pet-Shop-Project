@@ -1,0 +1,19 @@
+.vetsContentDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mostOuterDiv1 {
+  padding-left: 250px;
+  padding-right: 250px;
+}
+
+.vetH1 {
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
+}
