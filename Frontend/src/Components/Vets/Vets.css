@@ -1,14 +1,14 @@
 .vetsContentDiv {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   justify-content: center;
   align-items: center;
 }
 
 .mostOuterDiv1 {
-  padding-left: 250px;
-  padding-right: 250px;
+  padding-left: 75px;
+  padding-right: 75px;
 }
 
 .vetH1 {

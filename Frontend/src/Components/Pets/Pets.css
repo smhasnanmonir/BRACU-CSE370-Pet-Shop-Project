@@ -6,17 +6,8 @@
   justify-items: center;
 }
 
-.petsImg {
-  width: 275px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 7px;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-}
-
 .mainDiv {
-  padding: 20px 230px;
+  padding: 20px 70px;
 }
 
 .petsBox {

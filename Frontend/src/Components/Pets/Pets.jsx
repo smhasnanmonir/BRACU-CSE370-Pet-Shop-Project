@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Pets.css";
+import PetBox from "./PetBox";
+
 const Pets = () => {
   const [petData, setPetData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,14 +19,7 @@ const Pets = () => {
     <div className="mainDiv">
       <div className="petContentDiv">
         {petData?.map((pet, i) => (
-          <div className="petsBox" key={i}>
-            <img className="petsImg" src={pet.img} alt={pet.name} />
-            <div className="petDetails">
-              <h4>{pet.name}</h4>
-              <p>{pet.description}</p>
-              <button className="btn1">Adopt</button>
-            </div>
-          </div>
+          <PetBox key={i} pet={pet}></PetBox>
         ))}
       </div>
     </div>
