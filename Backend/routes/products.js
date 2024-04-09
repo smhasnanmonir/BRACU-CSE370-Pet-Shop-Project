@@ -4,7 +4,7 @@ import db from "../connect.js";
 const productsRouter = express.Router();
 
 //Get data of all hospitals from database
-productsRouter.get("/allProducts", (req, res) => {
+productsRouter.get("/products", (req, res) => {
   const q = "select * from product_table";
   db.query(q, (err, data) => {
     if (err) {
@@ -31,7 +31,7 @@ productsRouter.get("/singleProduct/:id", (req, res) => {
   });
 });
 
-productsRouter.post("/allProducts", (req, res) => {
+productsRouter.post("/products", (req, res) => {
   let q =
     "insert into product_table (`description`, `price`, `cate`) values (?)";
   const values = [req.body.description, req.body.price, req.body.cate];

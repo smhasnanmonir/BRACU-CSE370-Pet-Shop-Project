@@ -3,7 +3,7 @@ import db from "../connect.js";
 
 const hospitalRouter = express.Router();
 
-hospitalRouter.get("/allHospital", (req, res) => {
+hospitalRouter.get("/vets", (req, res) => {
   const q = "select * from hospitalTable";
   db.query(q, (err, data) => {
     if (err) {
@@ -14,7 +14,7 @@ hospitalRouter.get("/allHospital", (req, res) => {
   });
 });
 
-hospitalRouter.get("/hospitalDetails/:id", (req, res) => {
+hospitalRouter.get("/vetDetails/:id", (req, res) => {
   let id = req.params.id;
   let q = "select * from hospitalTable where h_id = (?)";
   db.query(q, id, (err, data) => {
@@ -23,7 +23,7 @@ hospitalRouter.get("/hospitalDetails/:id", (req, res) => {
   });
 });
 
-hospitalRouter.put("/hospitalUpdate/:id", (req, res) => {
+hospitalRouter.put("/vetUpdate/:id", (req, res) => {
   let id = req.params.id;
   let q =
     "update hospitalTable set hospital_name=?, address=?, city=?, phone_number=? where h_id = (?)";
