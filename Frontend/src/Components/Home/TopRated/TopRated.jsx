@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./TopRated.css";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const TopRated = () => {
+  const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +29,11 @@ const TopRated = () => {
               <Card.Title>{product?.name}</Card.Title>
               <Card.Text>{product?.description}</Card.Text>
               <Card.Text>Price: {product?.price} BDT</Card.Text>
-              <Button variant="danger">Buy</Button>
+              {user == "admin" ? (
+                <Button variant="danger">Edit</Button>
+              ) : (
+                <Button variant="danger">Buy</Button>
+              )}
             </Card.Body>
           </Card>
         ))}

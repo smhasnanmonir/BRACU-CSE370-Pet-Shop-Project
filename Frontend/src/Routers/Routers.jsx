@@ -4,6 +4,7 @@ import HomeContent from "../Components/Home/HomeContent/HomeContent";
 import Pets from "../Components/Pets/Pets";
 import Vets from "../Components/Vets/Vets";
 import VetDetails from "../Components/Vets/VetDetails/VetDetails";
+import AdminPanel from "../Components/AdminPanel/Admin/AdminPanel";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/vet-details/:id",
         element: <VetDetails></VetDetails>,
+      },
+      {
+        path: "/admin-dashboard",
+        element: <AdminPanel></AdminPanel>,
       },
     ],
   },

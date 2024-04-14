@@ -22,3 +22,9 @@
 .petDetails p {
   padding: 5px 0px;
 }
+
+.inputForm {
+  display: block;
+  padding: 7px 23px;
+  margin-bottom: 7px;
+}
