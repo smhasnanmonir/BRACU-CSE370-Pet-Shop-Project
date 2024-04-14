@@ -14,7 +14,7 @@ petsRouter.get("/pets", (req, res) => {
 
 petsRouter.get("/singlePet/:id", (req, res) => {
   let id = req.params.id;
-  let q = "SELECT * FROM pet_table WHERE user_id = ?";
+  let q = "SELECT * FROM pet_table WHERE pet_id = ?";
   db.query(q, id, (err, data) => {
     if (err) res.send(err);
     res.send(data);
@@ -34,6 +34,19 @@ petsRouter.post("/pets", (req, res) => {
   db.query(q, [values], (err, data) => {
     if (err) res.send(err);
     res.send(data);
+  });
+});
+
+petsRouter.put("/petUpdate/:id", (req, res) => {
+  let id = req.params.id;
+  let q = "update pet_table set description =?, name=?  where pet_id = (?)";
+  let values = [req.body.description, req.body.name, id];
+  db.query(q, values, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
   });
 });
 
