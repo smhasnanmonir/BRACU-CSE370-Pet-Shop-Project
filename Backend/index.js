@@ -8,7 +8,9 @@ import petsRouter1 from "./routes/pets.js";
 
 const app = express();
 const port = 8080;
+import cors from "cors";
 app.use(express.json());
+app.use(cors());
 
 app.use("/api", userRouter);
 app.use("/api", productsRoutes1);

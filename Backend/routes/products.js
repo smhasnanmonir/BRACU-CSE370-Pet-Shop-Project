@@ -44,7 +44,7 @@ productsRouter.post("/products", (req, res) => {
   });
 });
 
-productsRouter.put("/singleProduct/:id", (req, res) => {
+productsRouter.put("/productUpdate/:id", (req, res) => {
   let id = req.params.id;
   let q =
     "update product_table set description =?, price =?, cate =? where p_id = (?)";
