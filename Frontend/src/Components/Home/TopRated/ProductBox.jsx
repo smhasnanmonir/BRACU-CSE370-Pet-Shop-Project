@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from "react";
-import "./Pets.css";
-import Swal from "sweetalert2";
+import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Modal from "react-bootstrap/Modal";
-import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import Modal from "react-bootstrap/Modal";
 
-const PetBox = ({ pet, sendDataToParent }) => {
+const ProductBox = ({ product, sendDataToParent }) => {
   const { user } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -36,7 +34,7 @@ const PetBox = ({ pet, sendDataToParent }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:8080/api/petUpdate/${pet?.pet_id}`,
+          `http://localhost:8080/api/productUpdate/${product?.p_id}`,
           {
             method: "PUT",
             headers: {
@@ -53,8 +51,8 @@ const PetBox = ({ pet, sendDataToParent }) => {
         console.log("Response:", responseData);
 
         if (responseData?.affectedRows === 1) {
-          sendDataToParent(data);
           setShow(false);
+          sendDataToParent(data);
           Swal.fire({
             title: "Updated",
             text: "Your Pet has been Updated.",
@@ -68,18 +66,17 @@ const PetBox = ({ pet, sendDataToParent }) => {
   console.log(watch("example"));
 
   return (
-    <div>
-      <Card cl style={{ width: "20rem" }}>
-        <Card.Img className="petsImg" variant="top" src={pet?.img} />
-        <Card.Body className="petDetails">
-          <Card.Title>{pet?.name}</Card.Title>
-          <Card.Text>{pet?.description}</Card.Text>
+    <>
+      <Card style={{ width: "20rem" }}>
+        <Card.Img className="" variant="top" src={product?.img} />
+        <Card.Body>
+          <Card.Title>{product?.name}</Card.Title>
+          <Card.Text>{product?.description}</Card.Text>
+          <Card.Text>Price: {product?.price} BDT</Card.Text>
           {user == "admin" ? (
-            <>
-              <Button onClick={handleShow} variant="danger">
-                Edit
-              </Button>
-            </>
+            <Button onClick={handleShow} variant="danger">
+              Edit
+            </Button>
           ) : (
             <Button variant="danger">Buy</Button>
           )}
@@ -95,18 +92,36 @@ const PetBox = ({ pet, sendDataToParent }) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{pet?.name}</Modal.Title>
+          <Modal.Title>{product?.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="formPet" onSubmit={handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}
             <label htmlFor="description">Description</label>
-            <input className="inputForm" {...register("description")} />
+            <input
+              className="inputForm"
+              defaultValue={product?.description}
+              {...register("description")}
+            />
+
+            <label htmlFor="price">Price</label>
+            <input
+              className="inputForm"
+              defaultValue={product?.price}
+              {...register("price", { required: false })}
+            />
+
+            <label htmlFor="name">Category</label>
+            <input
+              className="inputForm"
+              defaultValue={product?.cate}
+              {...register("cate", { required: false })}
+            />
 
             <label htmlFor="name">Name</label>
             <input
               className="inputForm"
-              defaultValue={pet?.name}
+              defaultValue={product?.name}
               {...register("name", { required: false })}
             />
             <input className="inputForm" type="submit" />
@@ -118,8 +133,8 @@ const PetBox = ({ pet, sendDataToParent }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 
-export default PetBox;
+export default ProductBox;

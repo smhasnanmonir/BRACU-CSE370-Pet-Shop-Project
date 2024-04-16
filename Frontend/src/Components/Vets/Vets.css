@@ -17,3 +17,9 @@
   font-size: 25px;
   font-weight: 400;
 }
+
+.inputForm {
+  display: block;
+  padding: 7px 23px;
+  margin-bottom: 7px;
+}

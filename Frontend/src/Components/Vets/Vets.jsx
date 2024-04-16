@@ -7,6 +7,12 @@ const Vets = () => {
   const [vets, setVets] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [dataFromChild, setDataFromChild] = useState("");
+
+  const handleDataFromChild = (data) => {
+    setDataFromChild(data);
+  };
+
   useEffect(() => {
     fetch("http://localhost:8080/api/vets")
       .then((res) => res.json())
@@ -14,13 +20,17 @@ const Vets = () => {
         setVets(data);
         setLoading(false);
       });
-  }, []);
+  }, [dataFromChild]);
+
   return (
     <div className="mostOuterDiv1">
-      <h1 className="text-center vetH1">Our Top Rated Vets</h1>
       <div className="vetsContentDiv mb-4">
         {vets?.map((vet) => (
-          <VetBox key={vet?.hospital_id} vet={vet}></VetBox>
+          <VetBox
+            sendDataToParent={handleDataFromChild}
+            key={vet?.hospital_id}
+            vet={vet}
+          ></VetBox>
         ))}
       </div>
     </div>
