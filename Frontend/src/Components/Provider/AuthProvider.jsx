@@ -6,6 +6,7 @@ const AuthProvider = ({ children }) => {
   let user = "admin";
   let authInfo = {
     user: user,
+    user_id: 11,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -40,7 +40,9 @@ const HomeSlider = () => {
             </div>
             <div className="swiperImgContent">
               <h1>Buy Your Pet Quality Food</h1>
-              <Link className="btn-primary">Buy Pet Food</Link>
+              <Link to="/products" className="btn-primary">
+                Buy Pet Food
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -51,7 +53,9 @@ const HomeSlider = () => {
             </div>
             <div className="swiperImgContent">
               <h1>Book an appointment in nearest vet</h1>
-              <Link className="btn-primary">See Vets</Link>
+              <Link to="/vets" className="btn-primary">
+                See Vets
+              </Link>
             </div>
           </div>
         </SwiperSlide>

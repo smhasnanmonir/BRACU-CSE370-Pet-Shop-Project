@@ -10,10 +10,18 @@ const NavBarComp = () => {
           <img className="logo" src={logo} alt="logo" />
         </div>
         <div className="navigationDiv">
-          <Link className="navLink">Home</Link>
-          <Link className="navLink">Adoptions</Link>
-          <Link className="navLink">Vets</Link>
-          <Link className="navLink">Profile</Link>
+          <Link to="/" className="navLink">
+            Home
+          </Link>
+          <Link to="/adoption" className="navLink">
+            Adoptions
+          </Link>
+          <Link to="/vets" className="navLink">
+            Vets
+          </Link>
+          <Link to="/user-profile" className="navLink">
+            Profile
+          </Link>
         </div>
         <div className="searchBox">
           <input type="text" />

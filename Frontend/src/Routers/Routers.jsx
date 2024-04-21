@@ -5,6 +5,8 @@ import Pets from "../Components/Pets/Pets";
 import Vets from "../Components/Vets/Vets";
 import VetDetails from "../Components/Vets/VetDetails/VetDetails";
 import AdminPanel from "../Components/AdminPanel/Admin/AdminPanel";
+import UserProfile from "../Components/UserProfile/UserProfile";
+import TopRated from "../Components/Home/TopRated/TopRated";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,30 @@ const router = createBrowserRouter([
       },
       {
         path: "/adoption",
-        element: <Pets></Pets>,
+        element: (
+          <>
+            <h5 className="text-center mt-4">Pets to Adopt</h5>
+            <Pets></Pets>
+          </>
+        ),
+      },
+      {
+        path: "/products",
+        element: (
+          <>
+            <h5 className="text-center mb-4 mt-4">Pet foods</h5>
+            <TopRated></TopRated>
+          </>
+        ),
       },
       {
         path: "/vets",
-        element: <Vets></Vets>,
+        element: (
+          <>
+            <h5 className="text-center mt-4 mb-4">Our Vet Services</h5>
+            <Vets></Vets>
+          </>
+        ),
       },
       {
         path: "/vet-details/:id",
@@ -30,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/admin-dashboard",
         element: <AdminPanel></AdminPanel>,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfile></UserProfile>,
       },
     ],
   },

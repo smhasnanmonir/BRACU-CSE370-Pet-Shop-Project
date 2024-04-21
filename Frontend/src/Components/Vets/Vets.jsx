@@ -23,7 +23,7 @@ const Vets = () => {
   }, [dataFromChild]);
 
   return (
-    <div className="mostOuterDiv1">
+    <div className="mostOuterDiv1 mt-4">
       <div className="vetsContentDiv mb-4">
         {vets?.map((vet) => (
           <VetBox

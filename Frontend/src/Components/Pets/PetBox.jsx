@@ -9,7 +9,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 
 const PetBox = ({ pet, sendDataToParent }) => {
-  const { user } = useContext(AuthContext);
+  const { user, user_id } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
 
@@ -67,6 +67,47 @@ const PetBox = ({ pet, sendDataToParent }) => {
 
   console.log(watch("example"));
 
+  const handleBuy = async () => {
+    let orderData = {
+      user_id: user_id,
+      pet_id: pet?.pet_id,
+    };
+    console.log(orderData);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to adopt?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Please!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(`http://localhost:8080/api/adoptions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        });
+        if (!response.ok) {
+          throw new Error(response.message);
+        }
+
+        const responseData = await response.json();
+        console.log("Response:", responseData);
+
+        if (responseData?.affectedRows === 1) {
+          Swal.fire({
+            title: "Adopted!",
+            text: "You just adopted a pet!",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <Card cl style={{ width: "20rem" }}>
@@ -81,12 +122,14 @@ const PetBox = ({ pet, sendDataToParent }) => {
               </Button>
             </>
           ) : (
-            <Button variant="danger">Buy</Button>
+            <Button onClick={handleBuy} variant="danger">
+              Adopt
+            </Button>
           )}
         </Card.Body>
       </Card>
 
-      {/* Modal */}
+      {/* Modal for admin starts*/}
 
       <Modal
         show={show}
@@ -118,6 +161,8 @@ const PetBox = ({ pet, sendDataToParent }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Modal for admin Ends*/}
     </div>
   );
 };

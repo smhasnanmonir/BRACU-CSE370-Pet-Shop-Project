@@ -1,0 +1,19 @@
+.adminOrder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+  padding: 0 175px;
+}
+
+.orderInnerDiv {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.adoptionDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+}

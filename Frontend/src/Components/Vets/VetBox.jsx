@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const VetBox = ({ vet, sendDataToParent }) => {
-  const { user } = useContext(AuthContext);
+  const { user, user_id } = useContext(AuthContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -67,6 +67,50 @@ const VetBox = ({ vet, sendDataToParent }) => {
 
   console.log(watch("example"));
 
+  const handleBook = async () => {
+    let orderData = {
+      booker_id: user_id,
+      h_id: vet?.h_id,
+    };
+    console.log(orderData);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to book an appointment?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Please!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:8080/api/hospitalBooking`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderData),
+          }
+        );
+        if (!response.ok) {
+          throw new Error(response.message);
+        }
+
+        const responseData = await response.json();
+        console.log("Response:", responseData);
+
+        if (responseData?.affectedRows === 1) {
+          Swal.fire({
+            title: "Done!",
+            text: "You just booked an appointment!",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <Card style={{ width: "20rem" }}>
@@ -81,11 +125,8 @@ const VetBox = ({ vet, sendDataToParent }) => {
             </Button>
           ) : (
             <>
-              <Link>
+              <Link onClick={handleBook}>
                 <Button variant="danger">Book</Button>
-              </Link>
-              <Link to={`/vet-details/${vet?.h_id}`}>
-                <Button variant="danger ms-2">Details</Button>
               </Link>
             </>
           )}

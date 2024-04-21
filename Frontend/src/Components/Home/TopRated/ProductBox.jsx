@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import Modal from "react-bootstrap/Modal";
 
 const ProductBox = ({ product, sendDataToParent }) => {
-  const { user } = useContext(AuthContext);
+  const { user, user_id } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -65,6 +65,47 @@ const ProductBox = ({ product, sendDataToParent }) => {
 
   console.log(watch("example"));
 
+  const handleBuy = async () => {
+    let orderData = {
+      user_id: user_id,
+      product_id: product?.p_id,
+    };
+    console.log(orderData);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to buy this product?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Please!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(`http://localhost:8080/api/userOrders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        });
+        if (!response.ok) {
+          throw new Error(response.message);
+        }
+
+        const responseData = await response.json();
+        console.log("Response:", responseData);
+
+        if (responseData?.affectedRows === 1) {
+          Swal.fire({
+            title: "Added to cart",
+            text: "Order placed successfully",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <>
       <Card style={{ width: "20rem" }}>
@@ -78,7 +119,9 @@ const ProductBox = ({ product, sendDataToParent }) => {
               Edit
             </Button>
           ) : (
-            <Button variant="danger">Buy</Button>
+            <Button onClick={handleBuy} variant="danger">
+              Buy
+            </Button>
           )}
         </Card.Body>
       </Card>
