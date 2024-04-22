@@ -33,8 +33,13 @@ productsRouter.get("/singleProduct/:id", (req, res) => {
 
 productsRouter.post("/products", (req, res) => {
   let q =
-    "insert into product_table (`description`, `price`, `cate`) values (?)";
-  const values = [req.body.description, req.body.price, req.body.cate];
+    "insert into product_table (`description`, `price`, `cate`, `img`) values (?)";
+  const values = [
+    req.body.description,
+    req.body.price,
+    req.body.cate,
+    req.body.img,
+  ];
   db.query(q, [values], (err, data) => {
     if (err) {
       res.send(err);

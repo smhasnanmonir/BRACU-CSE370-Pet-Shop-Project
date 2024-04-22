@@ -23,6 +23,22 @@ hospitalRouter.get("/vetDetails/:id", (req, res) => {
   });
 });
 
+hospitalRouter.post("/vets", (req, res) => {
+  let q =
+    "insert into hospitalTable (`hospital_name`,`address`, `city`, `phone_number`, `img`) values (?)";
+  const values = [
+    req.body.hospital_name,
+    req.body.address,
+    req.body.city,
+    req.body.phone_number,
+    req.body.img,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
 hospitalRouter.put("/vetUpdate/:id", (req, res) => {
   let id = req.params.id;
   let q =

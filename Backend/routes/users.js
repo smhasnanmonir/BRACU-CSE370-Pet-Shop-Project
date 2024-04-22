@@ -12,7 +12,7 @@ userRouter.get("/users", (req, res) => {
   });
 });
 
-// Get single user data from database
+// Get single user data from database from id
 userRouter.get("/singleUser/:id", (req, res) => {
   let id = req.params.id;
   let q = "SELECT * FROM user_table WHERE user_id = ?";
@@ -22,10 +22,27 @@ userRouter.get("/singleUser/:id", (req, res) => {
   });
 });
 
+// Get single user data from database from email
+userRouter.get("/singleUserFromEmail/:email", (req, res) => {
+  let email = req.params.email;
+  let q = "SELECT * FROM user_table WHERE email = ?";
+  db.query(q, email, (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
 // insert a new user into the database
-userRouter.post("/allUser", (req, res) => {
-  let q = "insert into user_table (`username`, `email`, `password`) values (?)";
-  const values = [req.body.username, req.body.email, req.body.password];
+userRouter.post("/users", (req, res) => {
+  let q =
+    "insert into user_table (`username`, `email`, `password`, `name` ,`phone`) values (?)";
+  const values = [
+    req.body.username,
+    req.body.email,
+    req.body.password,
+    req.body.name,
+    req.body.phone,
+  ];
   db.query(q, [values], (err, data) => {
     if (err) res.send(err);
     res.send(data);

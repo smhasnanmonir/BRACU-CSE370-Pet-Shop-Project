@@ -22,15 +22,8 @@ petsRouter.get("/singlePet/:id", (req, res) => {
 });
 
 petsRouter.post("/pets", (req, res) => {
-  let q =
-    "insert into pet_table (`name`,`img`, `description`, `previous_vet`, `isAdopted`) values (?)";
-  const values = [
-    req.body.name,
-    req.body.img,
-    req.body.description,
-    req.body.previous_vet,
-    req.body.isAdopted,
-  ];
+  let q = "insert into pet_table (`name`,`img`, `description`) values (?)";
+  const values = [req.body.name, req.body.img, req.body.description];
   db.query(q, [values], (err, data) => {
     if (err) res.send(err);
     res.send(data);
