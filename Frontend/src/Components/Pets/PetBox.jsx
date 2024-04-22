@@ -112,7 +112,7 @@ const PetBox = ({ pet, sendDataToParent }) => {
         <Card.Body className="petDetails">
           <Card.Title>{pet?.name}</Card.Title>
           <Card.Text>{pet?.description}</Card.Text>
-          {user == "admin" ? (
+          {userInfo?.[0]?.userType === "admin" ? (
             <>
               <Button onClick={handleShow} variant="danger">
                 Edit

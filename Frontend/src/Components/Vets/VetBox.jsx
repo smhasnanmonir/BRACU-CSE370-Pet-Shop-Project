@@ -90,6 +90,7 @@ const VetBox = ({ vet, sendDataToParent }) => {
             body: JSON.stringify(orderData),
           }
         );
+
         if (!response.ok) {
           throw new Error(response.message);
         }
@@ -116,10 +117,12 @@ const VetBox = ({ vet, sendDataToParent }) => {
           <Card.Title>{vet?.hospital_name}</Card.Title>
           <Card.Text>{vet?.city}</Card.Text>
           <Card.Text>Contact: {vet?.phone_number}</Card.Text>
-          {user == "admin" ? (
-            <Button onClick={handleShow} variant="danger">
-              Edit
-            </Button>
+          {userInfo?.[0]?.userType === "admin" ? (
+            <>
+              <Button onClick={handleShow} variant="danger">
+                Edit
+              </Button>
+            </>
           ) : (
             <>
               <Link onClick={handleBook}>

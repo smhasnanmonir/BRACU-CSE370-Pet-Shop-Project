@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 
 const ProductBox = ({ product, sendDataToParent }) => {
   const { user, userInfo } = useContext(AuthContext);
+  console.log(userInfo);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -102,7 +103,6 @@ const ProductBox = ({ product, sendDataToParent }) => {
       }
     });
   };
-
   return (
     <>
       <Card style={{ width: "20rem" }}>
@@ -111,10 +111,12 @@ const ProductBox = ({ product, sendDataToParent }) => {
           <Card.Title>{product?.name}</Card.Title>
           <Card.Text>{product?.description}</Card.Text>
           <Card.Text>Price: {product?.price} BDT</Card.Text>
-          {user == "admin" ? (
-            <Button onClick={handleShow} variant="danger">
-              Edit
-            </Button>
+          {userInfo?.[0]?.userType == "admin" ? (
+            <>
+              <Button onClick={handleShow} variant="danger">
+                Edit
+              </Button>
+            </>
           ) : (
             <Button onClick={handleBuy} variant="danger">
               Buy

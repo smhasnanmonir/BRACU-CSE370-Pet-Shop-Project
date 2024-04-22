@@ -23,7 +23,6 @@ const router = createBrowserRouter([
         path: "/adoption",
         element: (
           <>
-            <h5 className="text-center mt-4">Pets to Adopt</h5>
             <Pets></Pets>
           </>
         ),
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
         path: "/products",
         element: (
           <>
-            <h5 className="text-center mb-4 mt-4">Pet foods</h5>
             <TopRated></TopRated>
           </>
         ),
@@ -41,7 +39,6 @@ const router = createBrowserRouter([
         path: "/vets",
         element: (
           <>
-            <h5 className="text-center mt-4 mb-4">Our Vet Services</h5>
             <Vets></Vets>
           </>
         ),

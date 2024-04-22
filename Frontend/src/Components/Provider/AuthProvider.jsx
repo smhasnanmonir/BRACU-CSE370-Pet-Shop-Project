@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
-  const [user_id, setUser_id] = useState(null);
   const [loading, setLoading] = useState(true);
   //email login with password
   const emailLogin = (email, password) => {
@@ -48,6 +47,9 @@ const AuthProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         setUserInfo(data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       });
   }, [user]);
 
@@ -68,7 +70,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
     });
     return () => {
       return unsubscribe;

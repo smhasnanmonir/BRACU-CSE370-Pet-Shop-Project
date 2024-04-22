@@ -25,9 +25,23 @@ const NavBarComp = () => {
           <Link to="/vets" className="navLink">
             Vets
           </Link>
-          <Link to="/user-profile" className="navLink">
-            Profile
+          <Link to="/products" className="navLink">
+            Products
           </Link>
+
+          {userInfo?.[0]?.userType == "admin" ? (
+            <>
+              <Link to="/admin-dashboard" className="navLink">
+                Profile
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/user-profile" className="navLink">
+                Profile
+              </Link>
+            </>
+          )}
         </div>
         <div className="searchBox">
           {user ? (

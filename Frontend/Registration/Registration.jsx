@@ -21,6 +21,7 @@ const Registration = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from);
         updateInfo(data.name)
           .then(() => {
             fetch("http://localhost:8080/api/users", {

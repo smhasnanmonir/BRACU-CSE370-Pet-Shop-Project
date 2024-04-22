@@ -2,4 +2,12 @@
   padding: 0 75px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-content: center;
+}
+
+.box_image {
+  width: 200px;
+  height: 275px;
+  object-fit: cover;
 }
