@@ -9,7 +9,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 
 const PetBox = ({ pet, sendDataToParent }) => {
-  const { user, user_id } = useContext(AuthContext);
+  const { user, userInfo } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
 
@@ -19,7 +19,6 @@ const PetBox = ({ pet, sendDataToParent }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -65,11 +64,9 @@ const PetBox = ({ pet, sendDataToParent }) => {
     });
   };
 
-  console.log(watch("example"));
-
   const handleBuy = async () => {
     let orderData = {
-      user_id: user_id,
+      user_id: userInfo?.[0]?.user_id,
       pet_id: pet?.pet_id,
     };
     console.log(orderData);

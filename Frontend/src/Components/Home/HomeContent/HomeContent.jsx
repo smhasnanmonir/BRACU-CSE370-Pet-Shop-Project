@@ -1,9 +1,12 @@
 import Pets from "../../Pets/Pets";
 import Vets from "../../Vets/Vets";
+import useAdmin from "../../hooks/useAdmin";
 import HomeSlider from "../HomeSlider/HomeSlider";
 import TopRated from "../TopRated/TopRated";
 
 const HomeContent = () => {
+  const { filterAdmin } = useAdmin();
+  console.log(filterAdmin);
   return (
     <div>
       <HomeSlider></HomeSlider>

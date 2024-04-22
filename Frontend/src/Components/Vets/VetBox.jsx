@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const VetBox = ({ vet, sendDataToParent }) => {
-  const { user, user_id } = useContext(AuthContext);
+  const { user, userInfo } = useContext(AuthContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,7 +19,6 @@ const VetBox = ({ vet, sendDataToParent }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -65,11 +64,9 @@ const VetBox = ({ vet, sendDataToParent }) => {
     });
   };
 
-  console.log(watch("example"));
-
   const handleBook = async () => {
     let orderData = {
-      booker_id: user_id,
+      booker_id: userInfo?.[0]?.user_id,
       h_id: vet?.h_id,
     };
     console.log(orderData);

@@ -5,36 +5,43 @@ import Card from "react-bootstrap/Card";
 import "./UserProfile.css";
 import Swal from "sweetalert2";
 const UserProfile = () => {
-  const { user_id } = useContext(AuthContext);
+  const { user, userInfo } = useContext(AuthContext);
   const [userOrder, setUserOrder] = useState([]);
   const [petOrder, setPetOrder] = useState([]);
   const [vetOrder, setVetOrder] = useState([]);
   const [load, setLoad] = useState(false);
+  console.log(petOrder?.length);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/userOrdersInnerJoin/${user_id}`)
+    fetch(
+      `http://localhost:8080/api/userOrdersInnerJoin/${userInfo?.[0]?.user_id}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setUserOrder(data);
       });
-  }, [load]);
+  }, [load, userInfo]);
   console.log(userOrder);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/adoptionInnerJoin/${user_id}`)
+    fetch(
+      `http://localhost:8080/api/adoptionInnerJoin/${userInfo?.[0]?.user_id}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setPetOrder(data);
       });
-  }, [load]);
+  }, [load, userInfo]);
   console.log("Inner Join", petOrder);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/hospitalBookingInnerJoin/${user_id}`)
+    fetch(
+      `http://localhost:8080/api/hospitalBookingInnerJoin/${userInfo?.[0]?.user_id}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setVetOrder(data);
       });
-  }, [load]);
+  }, [load, userInfo]);
   console.log("Inner Join", vetOrder);
 
   const handleDelete = async (path, id) => {
@@ -124,24 +131,36 @@ const UserProfile = () => {
 
       <h3 className="text-center mt-4 mb-4">Adoption request</h3>
       <div className="adoptionDiv">
-        {petOrder?.map((order) => (
-          <Card key={order?.order_id} style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={order?.img} />
-            <Card.Body>
-              <Card.Title>Ordered by: {order?.username}</Card.Title>
-              <Card.Text>Email: {order?.email}</Card.Text>
-              <Card.Text>Address: {order?.address}</Card.Text>
-              <Card.Text>Phone: {order?.phone}</Card.Text>
-              <Card.Text>Pet name: {order?.name}</Card.Text>
-              <Button
-                onClick={() => handleDelete("adoptions", order?.adoption_id)}
-                variant="danger"
-              >
-                Delete
-              </Button>
-            </Card.Body>
-          </Card>
-        ))}
+        {petOrder?.length === 0 ? (
+          <>
+            <h5 className="text-center">
+              You have not made any pet adoption request.
+            </h5>
+          </>
+        ) : (
+          <>
+            {petOrder?.map((order) => (
+              <Card key={order?.order_id} style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={order?.img} />
+                <Card.Body>
+                  <Card.Title>Ordered by: {order?.username}</Card.Title>
+                  <Card.Text>Email: {order?.email}</Card.Text>
+                  <Card.Text>Address: {order?.address}</Card.Text>
+                  <Card.Text>Phone: {order?.phone}</Card.Text>
+                  <Card.Text>Pet name: {order?.name}</Card.Text>
+                  <Button
+                    onClick={() =>
+                      handleDelete("adoptions", order?.adoption_id)
+                    }
+                    variant="danger"
+                  >
+                    Delete
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

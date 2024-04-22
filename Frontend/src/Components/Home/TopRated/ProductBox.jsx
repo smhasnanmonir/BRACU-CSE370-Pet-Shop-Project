@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import Modal from "react-bootstrap/Modal";
 
 const ProductBox = ({ product, sendDataToParent }) => {
-  const { user, user_id } = useContext(AuthContext);
+  const { user, userInfo } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -17,7 +17,6 @@ const ProductBox = ({ product, sendDataToParent }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -63,11 +62,9 @@ const ProductBox = ({ product, sendDataToParent }) => {
     });
   };
 
-  console.log(watch("example"));
-
   const handleBuy = async () => {
     let orderData = {
-      user_id: user_id,
+      user_id: userInfo?.[0]?.user_id,
       product_id: product?.p_id,
     };
     console.log(orderData);

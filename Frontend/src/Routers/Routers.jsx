@@ -7,6 +7,8 @@ import VetDetails from "../Components/Vets/VetDetails/VetDetails";
 import AdminPanel from "../Components/AdminPanel/Admin/AdminPanel";
 import UserProfile from "../Components/UserProfile/UserProfile";
 import TopRated from "../Components/Home/TopRated/TopRated";
+import Login from "../Components/Login/Login";
+import Registration from "../../Registration/Registration";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
       {
         path: "/user-profile",
         element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/registration",
+        element: <Registration></Registration>,
       },
     ],
   },
